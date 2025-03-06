@@ -9,30 +9,8 @@ import {
 import React from "react";
 import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
-import * as Font from "expo-font";
-import AppLoading from "expo-app-loading";
-import { rgbaColor } from "react-native-reanimated/lib/typescript/Colors";
-
-// const fetchFonts = () => {
-//   return Font.loadAsync({
-//     'CustomFont-Bold': require('@/assets/fonts/CustomFont-Bold.ttf'),
-//     'CustomFont-Regular': require('@/assets/fonts/CustomFont-Regular.ttf'),
-//   });
-// };
 
 const welcome = () => {
-  // const [fontsLoaded, setFontsLoaded] = React.useState(false);
-
-  // if (!fontsLoaded) {
-  //   return (
-  //     <AppLoading
-  //       startAsync={fetchFonts}
-  //       onFinish={() => setFontsLoaded(true)}
-  //       onError={(err: any) => console.log(err)}
-  //     />
-  //   );
-  // }
-
   return (
     <ImageBackground
       source={require("@/assets/images/pastel-background.jpg")}
@@ -53,19 +31,23 @@ const welcome = () => {
           />
         </View>
         <TouchableOpacity style={styles.loginButton}>
-          <Text
-            style={{
-              fontSize: 23,
-              color: "#000",
-              fontFamily: "",
-              padding: 5,
-            }}
-          >
-            Login
-          </Text>
+          <Link href="/login">
+            <Text
+              style={{
+                fontSize: 23,
+                color: "#000",
+                fontFamily: "",
+                padding: 5,
+              }}
+            >
+              Login
+            </Text>
+          </Link>
         </TouchableOpacity>
         <TouchableOpacity style={styles.loginButton}>
-          <Text style={styles.registerButton}>Registrar</Text>
+          <Link href="/register">
+            <Text style={styles.registerButton}>Registrar</Text>
+          </Link>
         </TouchableOpacity>
       </View>
       {/* </LinearGradient> */}
