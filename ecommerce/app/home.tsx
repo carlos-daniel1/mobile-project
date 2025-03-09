@@ -18,10 +18,10 @@ const home = () => {
  const [pasteis, setPasteis] = useState(
     pastelData.sort((a, b) => b.id - a.id)
   );
-
+  
   const renderItem = ({ item }: { item: Pastel }) => (
     <View style={styles.itemContainer}>
-      <Image source={{ uri: item.img }} style={styles.image} />
+    <Image source={{ uri: item.img }} style={styles.image} />
       <Text style={styles.name}>{item.name}</Text>
       <Text style={styles.desc}>{item.desc}</Text>
       <Text style={styles.price}>Preço: R${item.price.toFixed(2)}</Text>
@@ -30,9 +30,10 @@ const home = () => {
   );
 
   return (
+    
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={["#AD6F69", "#43302E"]}
+        colors={["#FFF5EE","#FFF5EE"]}
         style={styles.gradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -63,6 +64,7 @@ const styles = StyleSheet.create({
   row: {
     flex: 1,
     justifyContent: "space-around",
+    width:"100%"
   },
   itemContainer: {
     flex: 1,
@@ -98,6 +100,7 @@ const styles = StyleSheet.create({
   },
   promotion: {
     fontSize: 12,
+    fontFamily:"bold",
     color: "red",
     marginTop: 5,
     textAlign: "center",

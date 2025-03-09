@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Link } from "expo-router";
+
 
 
 const RegisterScreen: React.FC = () => {
@@ -29,10 +31,15 @@ const RegisterScreen: React.FC = () => {
       />
 
       <TouchableOpacity style={styles.button}>
+        <Link href="/login">
         <Text style={styles.buttonText}>Registrar</Text>
+        </Link>
       </TouchableOpacity>
 
+
+      <Link href="/login">
       <Text style={styles.footerText}>Já tem uma conta? <Text style={styles.link}>Faça login</Text></Text>
+      </Link>
     </View>
   );
 };

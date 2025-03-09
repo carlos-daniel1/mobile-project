@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Link } from "expo-router";
+
 
 const LoginScreen: React.FC = () => {
   return (
@@ -19,7 +21,10 @@ const LoginScreen: React.FC = () => {
       />
 
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Entrar</Text>
+        <Link href="/home">
+        <Text style={styles.buttonText}>Entrar</Text>       
+        </Link>
+        
       </TouchableOpacity>
 
       <Text style={styles.footerText}>Esqueceu a senha?</Text>
