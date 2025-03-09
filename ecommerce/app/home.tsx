@@ -15,29 +15,31 @@ interface Pastel {
 }
 
 const home = () => {
- const [pasteis, setPasteis] = useState(
+  const [pasteis, setPasteis] = useState(
     pastelData.sort((a, b) => b.id - a.id)
   );
   
   const renderItem = ({ item }: { item: Pastel }) => (
     <View style={styles.itemContainer}>
-    <Image source={{ uri: item.img }} style={styles.image} />
+      <Image source={{ uri: item.img }} style={styles.image} />
       <Text style={styles.name}>{item.name}</Text>
       <Text style={styles.desc}>{item.desc}</Text>
-      <Text style={styles.price}>Preço: R${item.price.toFixed(2)}</Text>
-      <Text style={styles.promotion}>Promoção: R${item.promotion.toFixed(2)}</Text>
+      <Text style={styles.price}>R$ {item.price.toFixed(2)} </Text>
+      <Text style={styles.promotion}>R$ {item.promotion.toFixed(2)}</Text>
     </View>
   );
 
   return (
-    
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={["#FFF5EE","#FFF5EE"]}
+        colors={["#FFF5EE", "#FFF5EE"]}
         style={styles.gradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
+        
+        <Text style={styles.title}>Faça seu pedido</Text>
+        
         <FlatList
           data={pasteis}
           renderItem={renderItem}
@@ -54,7 +56,7 @@ export default home;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   gradient: {
     flex: 1,
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
   row: {
     flex: 1,
     justifyContent: "space-around",
-    width:"100%"
+    width: "100%",
   },
   itemContainer: {
     flex: 1,
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   name: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: "bold",
     marginTop: 5,
     textAlign: "center",
@@ -94,15 +96,22 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 12,
-    color: "#000",
-    marginTop: 5,
+    color: "gray",
+    marginTop: 16,
     textAlign: "center",
+    textDecorationLine: "line-through",
   },
   promotion: {
-    fontSize: 12,
-    fontFamily:"bold",
+    fontSize: 16,
+    fontFamily: "extra-bold",
     color: "red",
-    marginTop: 5,
+    marginTop: 4,
     textAlign: "center",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20, 
   },
 });
