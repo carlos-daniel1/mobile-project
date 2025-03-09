@@ -34,17 +34,17 @@ const welcome = () => {
           <Link href="/login">
             <Text
               style={{
-                fontSize: 23,
-                color: "#000",
-                fontFamily: "",
-                padding: 5,
+                fontSize: 20,
+                color: "#EEE",
+                fontFamily: "bold",
+                padding: 16,
               }}
             >
               Login
             </Text>
           </Link>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.loginButton}>
+        <TouchableOpacity style={styles.registerButton}>
           <Link href="/register">
             <Text style={styles.registerButton}>Registrar</Text>
           </Link>
@@ -77,18 +77,23 @@ const styles = StyleSheet.create({
     height: 100,
   },
   loginButton: {
-    backgroundColor: "#EEE",
+    backgroundColor: "#B22222",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 6,
-    marginBottom: 20,
+    width: "64%",
+    height:"12%",
+    borderRadius: 8,
+    marginBottom: 24,
+  
   },
   registerButton: {
     color: "white",
     backgroundColor: "rgb(94, 46, 14)",
+    width:"64%",
+    height:"12%",
     fontSize: 20,
-    borderRadius: 6,
-    width: "100%",
+    borderRadius: 8,
+   
     textAlign: "center",
     padding: 8,
   },

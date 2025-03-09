@@ -5,7 +5,7 @@ const LoginScreen: React.FC = () => {
   return (
     
     <View style={styles.container}>
-      <Text style={styles.title}>Tela de Login</Text>
+      <Text style={styles.title}>Acesse sua conta</Text>
 
       <TextInput
         placeholder="Email"
@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   title: {
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 40,
   },
   input: {
-    height: 50,
+    height: 48,
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 5,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#B22222',
     paddingVertical: 12,
     borderRadius: 5,
     marginTop: 20,
