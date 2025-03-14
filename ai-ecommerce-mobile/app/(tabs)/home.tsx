@@ -1,23 +1,20 @@
- import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, FlatList, Image, SafeAreaView, TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native'; 
+import { StackNavigationProp } from '@react-navigation/stack'; 
+import { useCart } from '../cartcontext';
+import { Link } from 'expo-router';
+
 
 type RootStackParamList = {
   Home: undefined;
-  Cart: { cartItems: string }; 
+  Cart: undefined;
 };
 
-type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
-type Produto = {
-  id: string;
-  nome: string;
-  preco: string;
-  imagem: string;
-};
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
-const produtos: Produto[] = [
+const produtos = [
   { id: '1', nome: 'Café Espresso', preco: 'R$ 8,00', imagem: 'https://files.agro20.com.br/uploads/2020/01/Caf%C3%A9-expresso-1-1024x576.jpg' },
   { id: '2', nome: 'Cappuccino', preco: 'R$ 12,00', imagem: 'https://www.bongusto.ind.br/wp-content/uploads/2023/06/FRAPE-CAPUCCINO14.jpg' },
   { id: '3', nome: 'Chocolate Quente', preco: 'R$ 8,00', imagem: 'https://www.mococa.com.br/wp-content/uploads/2022/03/2313456.png' },
@@ -25,25 +22,11 @@ const produtos: Produto[] = [
 ];
 
 const Home = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const { cart, adicionarAoCarrinho } = useCart();
 
-  
-  const [cart, setCart] = useState<Produto[]>([]);
-
-  
-  const adicionarAoCarrinho = (produto: Produto) => {
-    setCart((prevCart) => {
-      const newCart = [...prevCart, produto];
-      console.log('Itens no carrinho:', newCart); 
-      return newCart;
-    });
-  };
-
-  
-  const irParaCarrinho = () => {
-    console.log('Itens sendo passados para o carrinho:', cart); 
-    navigation.navigate('Cart', { cartItems: JSON.stringify(cart) });
-  };
+  useEffect(() => {
+    console.log('Carrinho Atualizado:', cart);
+  }, [cart]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -51,7 +34,7 @@ const Home = () => {
       <FlatList
         data={produtos}
         keyExtractor={(item) => item.id}
-        numColumns={2} 
+        numColumns={2}
         renderItem={({ item }) => (
           <View style={styles.card}>
             <Image source={{ uri: item.imagem }} style={styles.image} />
@@ -65,9 +48,12 @@ const Home = () => {
           </View>
         )}
       />
-      <TouchableOpacity style={styles.cartButton} onPress={irParaCarrinho}>
-        <Text style={styles.cartButtonText}>Ir para o Carrinho ({cart.length})</Text>
-      </TouchableOpacity>
+      
+      <Link href="/cart" asChild>
+        <TouchableOpacity style={styles.cartButton}>
+          <Text style={styles.cartButtonText}>Ir para o Carrinho ({cart.length})</Text>
+        </TouchableOpacity>
+      </Link>
     </SafeAreaView>
   );
 };
@@ -87,9 +73,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   card: {
-    flex: 1, 
+    flex: 1,
     backgroundColor: '#FFF8E1',
-    margin: 8, 
+    margin: 8,
     borderRadius: 10,
     padding: 10,
     shadowColor: '#000',
@@ -97,16 +83,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 5,
-    maxWidth: '48%', 
+    maxWidth: '48%',
   },
   image: {
-    width: '100%', 
-    height: 100, 
+    width: '100%',
+    height: 100,
     borderRadius: 10,
   },
   infoContainer: {
     marginTop: 10,
-    alignItems: 'center', 
+    alignItems: 'center',
   },
   productName: {
     fontSize: 18,

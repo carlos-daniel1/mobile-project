@@ -1,51 +1,56 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Image, SafeAreaView } from 'react-native';
-import { useLocalSearchParams } from 'expo-router'; // Importe useLocalSearchParams
-
-type Produto = {
-  id: string;
-  nome: string;
-  preco: string;
-  imagem: string;
-};
+import { View, Text, StyleSheet, FlatList, Image, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
+import { useCart } from '../cartcontext';
 
 const Cart = () => {
-  const { cartItems } = useLocalSearchParams<{ cartItems: string }>();
-  console.log('Itens recebidos no carrinho:', cartItems); 
-
-  let parsedCartItems: Produto[] = [];
-
-  try {
-    parsedCartItems = cartItems ? JSON.parse(cartItems) : [];
-  } catch (error) {
-    console.error('Erro ao analisar os itens do carrinho:', error);
-  }
-
-  console.log('Itens decodificados:', parsedCartItems); 
+  const { cart, removerDoCarrinho } = useCart();
 
   const calcularTotal = () => {
-    return parsedCartItems.reduce((total, item) => {
-      const preco = parseFloat(item.preco.replace('R$ ', '').replace(',', '.'));
-      return total + preco;
-    }, 0).toFixed(2);
+    return cart
+      .reduce((total, item) => {
+        const preco = parseFloat(item.preco.replace('R$ ', '').replace(',', '.'));
+        return total + preco;
+      }, 0)
+      .toFixed(2);
+  };
+
+  const finalizarPedido = () => {
+    if (cart.length === 0) {
+      Alert.alert('Carrinho vazio', 'Adicione itens ao carrinho antes de finalizar o pedido.');
+      return;
+    }
+
+    Alert.alert(
+      'Pedido Finalizado',
+      `Seu pedido no valor de R$ ${calcularTotal()} foi confirmado. Obrigado!`,
+      [
+        { text: 'OK', onPress: () => console.log('Pedido finalizado') }
+      ]
+    );
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Carrinho</Text>
-      {parsedCartItems.length === 0 ? (
+      {cart.length === 0 ? (
         <Text style={styles.emptyCart}>Seu carrinho está vazio.</Text>
       ) : (
         <>
           <FlatList
-            data={parsedCartItems}
-            keyExtractor={(item) => item.id}
+            data={cart}
+            keyExtractor={(item) => item.cartId}
             renderItem={({ item }) => (
               <View style={styles.card}>
                 <Image source={{ uri: item.imagem }} style={styles.image} />
                 <View style={styles.infoContainer}>
                   <Text style={styles.productName}>{item.nome}</Text>
                   <Text style={styles.productPrice}>{item.preco}</Text>
+                  <TouchableOpacity
+                    style={styles.removeButton}
+                    onPress={() => removerDoCarrinho(item.cartId)}
+                  >
+                    <Text style={styles.removeButtonText}>Remover</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             )}
@@ -53,12 +58,15 @@ const Cart = () => {
           <View style={styles.totalContainer}>
             <Text style={styles.totalText}>Total: R$ {calcularTotal()}</Text>
           </View>
+          
+          <TouchableOpacity style={styles.finalizarButton} onPress={finalizarPedido}>
+            <Text style={styles.finalizarButtonText}>Finalizar Pedido</Text>
+          </TouchableOpacity>
         </>
       )}
     </SafeAreaView>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -99,6 +107,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#6D4C41',
   },
+  removeButton: {
+    marginTop: 10,
+    backgroundColor: '#FF6B6B',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  removeButtonText: {
+    color: '#FFF',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
   totalContainer: {
     marginTop: 20,
     padding: 15,
@@ -116,6 +137,18 @@ const styles = StyleSheet.create({
     color: '#3E2723',
     textAlign: 'center',
     marginTop: 20,
+  },
+  finalizarButton: {
+    marginTop: 20,
+    padding: 15,
+    backgroundColor: '#3E2723',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  finalizarButtonText: {
+    color: '#FFF',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
