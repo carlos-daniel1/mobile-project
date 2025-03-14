@@ -50,7 +50,7 @@ const login = () => {
         }
       } 
   return (
-    <LinearGradient colors={['#0EDFBD', '#0950AB']}
+    <LinearGradient colors={["#D7B899", "#4B2E2A"]}
         style={styles.container}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
@@ -59,14 +59,14 @@ const login = () => {
      <View style={styles.formContainer}>
         <View style={styles.logoContainer}>
             <AntDesign style={styles.logo} name="bank" />
-            <Text style={{color: '#FFF', fontSize:32, marginBottom: 20}}>Ecommerce IA</Text>
+            <Text style={{color: '#FFF', fontSize:32, marginBottom: 20}}>Cafeteria</Text>
         </View>
         <TextInput style={styles.input} placeholder='E-mail' onChangeText={(text) => {setEmail({value: text, dirty: true})}}/>
         {handleErrorEmail()}
         <TextInput style={styles.input} placeholder='Senha' onChangeText={(text) => {setPassword({value: text, dirty: true})}} secureTextEntry/>
         {handleErrorPassword()}
         <TouchableOpacity onPress={()=> handleErrorForm()} style={styles.loginButton}><Text style={{color: '#FFF'}}>Entrar</Text></TouchableOpacity>
-        <TouchableOpacity onPress={()=> router.replace('/welcome')} style={styles.backButton}><Text style={{color: '#0EDFBD'}}>Voltar</Text></TouchableOpacity>
+        <TouchableOpacity onPress={()=> router.replace('/welcome')} style={styles.backButton}><Text style={{color: '#fff'}}>Voltar</Text></TouchableOpacity>
     
     </View>   
 
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 50,
         marginBottom: 10,
-        backgroundColor: '#0EDFBD',
+        backgroundColor: '#A67C52',
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
@@ -111,19 +111,23 @@ const styles = StyleSheet.create({
     backButton: {
         width: '100%',
         height: 50,
-        backgroundColor: '#FFF',
+        backgroundColor: '#4B2E2A',
         borderRadius: 10,
         justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: '#0EDFBD',
+        alignItems: 'center'
+        
     },
     input: {
         width: '100%',
         backgroundColor: 'white',
         height: 40,
-        borderRadius: 5
-    },
+        borderRadius: 5,
+        marginBottom: 10,
+        paddingHorizontal: 10,
+        borderWidth: 1,
+        borderColor: '#C08552', 
+        color: '#4B2E2A', 
+      },
     error: {
         width: '100%',
         marginBottom: 20,

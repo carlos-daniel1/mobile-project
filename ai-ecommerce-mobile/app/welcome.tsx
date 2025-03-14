@@ -6,7 +6,7 @@ import { useRouter } from 'expo-router'
 const welcome = () => {
     const router = useRouter()
   return (
-    <LinearGradient colors={['#0EDFBD', '#0950AB']}
+    <LinearGradient colors={["#D7B899", "#4B2E2A"]}
         style={styles.container}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
@@ -15,11 +15,11 @@ const welcome = () => {
      <View style={styles.formContainer}>
         <View style={styles.logoContainer}>
             <AntDesign style={styles.logo} name="bank" />
-            <Text style={{color: '#FFF', fontSize:32}}>Ecommerce IA</Text>
+            <Text style={{color: '#FFF', fontSize:32}}>Cafeteria</Text>
             <Text style={{color: '#FFF', fontSize:18, marginBottom: 20}}>Seja Bem vindo!</Text>
         </View>
         <TouchableOpacity onPress={() => router.replace('/login')} style={styles.loginButton}><Text style={{color: '#FFF'}}>Login</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => router.replace('/register')} style={styles.registerButton}><Text style={{color: '#0EDFBD'}}>Registrar</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => router.replace('/register')} style={styles.registerButton}><Text style={{color: '#FFF'}}>Registrar</Text></TouchableOpacity>
     
     </View>   
 
@@ -55,20 +55,21 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 50,
         marginBottom: 10,
-        backgroundColor: '#0EDFBD',
+        backgroundColor: '#A67C52',
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
     },
     registerButton: {
         width: '100%',
+        
         height: 50,
-        backgroundColor: '#FFF',
+        backgroundColor: '#4B2E2A',
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
-        borderColor: '#0EDFBD',
+       
+        
     },
 
 })

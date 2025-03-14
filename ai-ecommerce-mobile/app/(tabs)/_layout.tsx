@@ -7,6 +7,7 @@ import { Divider, Menu, PaperProvider } from 'react-native-paper';
 import { Text, TouchableOpacity } from 'react-native';
 import MenuHeader from '@/components/MenuHeader';
 
+
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const [visible, setVisible] = useState(false);
@@ -22,13 +23,13 @@ export default function TabLayout() {
               color: 'white'
             },
             headerStyle: {
-              backgroundColor: '#0EDFBD'
+              backgroundColor: '#3E2723'
             },
             title: 'Home',
             headerRight: () => <MenuHeader/>,
             tabBarIcon: () => <MaterialCommunityIcons name="home" size={24} color='white'/>,
             tabBarStyle: {
-              backgroundColor: '#0EDFBD'
+              backgroundColor: '#3E2723'
             },
             tabBarActiveTintColor: 'white',
             tabBarInactiveTintColor: 'gray'
@@ -44,13 +45,13 @@ export default function TabLayout() {
               color: 'white'
             },
             headerStyle: {
-              backgroundColor: '#0EDFBD'
+              backgroundColor: '#3E2723'
             },
             headerRight: () => <MenuHeader/>,
             
             tabBarIcon: () => <MaterialCommunityIcons name="account-circle" size={24} color='white'/>,
             tabBarStyle: {
-              backgroundColor: '#0EDFBD'
+              backgroundColor: '#3E2723'
             },
             tabBarActiveTintColor: 'white',
             tabBarInactiveTintColor: 'gray'
